@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: restmanager-db
+    environment:
+      POSTGRES_DB: restdb
+      POSTGRES_USER: restuser
+      POSTGRES_PASSWORD: restpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: restmanager-api
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/restdb
+      SPRING_DATASOURCE_USERNAME: restuser
+      SPRING_DATASOURCE_PASSWORD: restpass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "true"
+      SERVER_PORT: 8081
+
+volumes:
+  pgdata:
