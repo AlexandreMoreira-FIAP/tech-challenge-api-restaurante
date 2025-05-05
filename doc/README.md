@@ -6,42 +6,47 @@ Nesta fase do projeto, o foco está na modelagem da entidade **Usuário**, conte
 
 ### 📦 Tabela: `usuarios`
 
-| Campo                   | Tipo             | Descrição                                   |
-| ----------------------- | ---------------- | ------------------------------------------- |
-| `id`                    | UUID ou BIGINT   | Identificador único do usuário              |
-| `nome`                  | VARCHAR          | Nome completo do usuário                    |
-| `email`                 | VARCHAR (unique) | E-mail do usuário (deve ser único)          |
-| `login`                 | VARCHAR (unique) | Nome de usuário (deve ser único)            |
-| `senha`                 | VARCHAR          | Senha criptografada (ex: BCrypt)            |
-| `tipo_usuario`          | VARCHAR          | Pode ser `CLIENTE` ou `DONO`                |
-| `data_ultima_alteracao` | TIMESTAMP        | Atualizado automaticamente a cada edição    |
-| `endereco_id`           | UUID ou BIGINT   | Chave estrangeira para a tabela `enderecos` |
+Responsável por armazenar clientes e donos de restaurante. Terá um campo para diferenciar os tipos.
 
----
-
-### 🔄 Relacionamento
-
-* `usuarios.endereco_id` → `enderecos.id`
-* Relacionamento muitos-para-um: cada usuário possui **um** endereço
+| Campo                   | Tipo             | Notas                                         |
+| ----------------------- | ---------------- | --------------------------------------------- |
+| `id`                    | UUID ou BIGINT   | PK, gerado automaticamente                    |
+| `nome`                  | VARCHAR          | Obrigatório                                   |
+| `email`                 | VARCHAR (unique) | Único, obrigatório                            |
+| `login`                 | VARCHAR (unique) | Único, obrigatório                            |
+| `senha`                 | VARCHAR          | Criptografada (ex: BCrypt)                    |
+| `tipo_usuario`          | VARCHAR          | Enum: `CLIENTE` ou `DONO`                     |
+| `data_ultima_alteracao` | TIMESTAMP        | Atualizado em cada modificação                |
+| `endereco_id`           | UUID ou BIGINT   | FK (opcional), relacionamento com `enderecos` |
 
 ---
 
 ### 🏠 Tabela: `enderecos`
 
-| Campo         | Tipo           | Descrição                       |
-| ------------- | -------------- | ------------------------------- |
-| `id`          | UUID ou BIGINT | Identificador único do endereço |
-| `rua`         | VARCHAR        | Nome da rua                     |
-| `numero`      | VARCHAR        | Número do endereço              |
-| `complemento` | VARCHAR        | Complemento (opcional)          |
-| `bairro`      | VARCHAR        | Bairro                          |
-| `cidade`      | VARCHAR        | Cidade                          |
-| `estado`      | VARCHAR        | Estado (UF)                     |
-| `cep`         | VARCHAR        | CEP (código postal)             |
+Separado por boas práticas (endereços podem mudar, reutilizar, etc).
+
+| Campo         | Tipo           | Notas    |
+| ------------- | -------------- | -------- |
+| `id`          | UUID ou BIGINT | PK       |
+| `rua`         | VARCHAR        |          |
+| `numero`      | VARCHAR        |          |
+| `complemento` | VARCHAR        | Opcional |
+| `bairro`      | VARCHAR        |          |
+| `cidade`      | VARCHAR        |          |
+| `estado`      | VARCHAR        |          |
+| `cep`         | VARCHAR        |          |
 
 ---
 
-### 🔍 Observações
+### 🔄 Relacionamento
+
+* `usuarios.endereco_id` → `enderecos.id` (muitos-para-um)
+* Cada usuário pode ter um endereço
+* Um endereço pode ser usado por vários usuários (mas geralmente é 1:1)
+
+---
+
+### 🔍 Observações técnicas
 
 * O campo `senha` deve ser **criptografado** com hash (ex: BCrypt)
 * `tipo_usuario` pode ser armazenado como `ENUM` no Java (ou VARCHAR no banco)
