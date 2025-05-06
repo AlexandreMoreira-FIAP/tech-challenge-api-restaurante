@@ -8,11 +8,12 @@ import org.springframework.stereotype.Repository;
 import br.com.posfiap.restmanager.entity.User;
 
 @Repository
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, Long>{
 
     Optional<User> findById(Long id);
     List<User> findAll(int size, int offset);
     Integer save(User user);
+    
     Integer update(User user, Long id);
     Integer delete(Long id);
     Optional<User> validateLogin(String login, String password);
