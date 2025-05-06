@@ -17,13 +17,11 @@ public class UserService {
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-    }
+    } 
     
-    
-    
-    public Integer save(User user) {
+    public void save(User user) {
         user.setLastUpdated(java.time.LocalDate.now());
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public List<User> findAll(int size, int offset) {
