@@ -1,6 +1,7 @@
 package br.com.posfiap.restmanager.service;
 
 import br.com.posfiap.restmanager.domain.Usuario;
+import br.com.posfiap.restmanager.error.BusinessException;
 import br.com.posfiap.restmanager.error.NotFoundException;
 import br.com.posfiap.restmanager.mapper.UsuarioMapper;
 import br.com.posfiap.restmanager.repository.UsuarioRepository;
@@ -19,6 +20,11 @@ public class UsuarioService {
     private final PasswordEncoder passwordEncoder;
 
     public Usuario incluir(Usuario usuario) {
+
+        usuarioRepository.findByLogin(usuario.getLogin())
+                .ifPresent(usuarioEntity -> {
+                    throw new BusinessException(format("Login {0} não está disponível.", usuario.getLogin()));
+                });
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         var usuarioEntity = usuarioRepository.save(usuarioMapper.mapToUsuarioEntity(usuario));

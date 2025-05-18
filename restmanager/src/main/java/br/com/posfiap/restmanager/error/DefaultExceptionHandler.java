@@ -13,6 +13,7 @@ import static br.com.posfiap.restmanager.util.Logger.logError;
 import static java.text.MessageFormat.format;
 import static java.time.LocalDateTime.now;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 @ControllerAdvice
 class DefaultExceptionHandler {
@@ -37,6 +38,15 @@ class DefaultExceptionHandler {
         logError(ex.getMessage(), ex);
         return ResponseEntity
                 .status(NOT_FOUND)
+                .body(ex.getErroResponseDto());
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<ErroResponseDto> handleBusinessException(BusinessException ex) {
+
+        logError(ex.getMessage(), ex);
+        return ResponseEntity
+                .status(UNPROCESSABLE_ENTITY)
                 .body(ex.getErroResponseDto());
     }
 
