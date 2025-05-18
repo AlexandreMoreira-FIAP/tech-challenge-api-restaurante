@@ -24,6 +24,11 @@ public class Logger {
         log.info("Resposta da requisição para {}. Dados: {}", descricao, resposta);
     }
 
+    public static void logResponseController(String descricao) {
+
+        log.info("Requisição para {} finalizada", descricao);
+    }
+
     public static void logError(String descricao, Throwable ex) {
 
         log.error(descricao, ex);

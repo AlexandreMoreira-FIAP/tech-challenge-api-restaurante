@@ -5,11 +5,15 @@ import br.com.posfiap.restmanager.domain.Usuario;
 import br.com.posfiap.restmanager.dto.EnderecoDto;
 import br.com.posfiap.restmanager.dto.UsuarioCreateDto;
 import br.com.posfiap.restmanager.dto.UsuarioResponseDto;
+import br.com.posfiap.restmanager.dto.UsuarioUpdateDto;
+import br.com.posfiap.restmanager.entity.EnderecoEntity;
 import br.com.posfiap.restmanager.entity.UsuarioEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
+
+import static java.util.Objects.nonNull;
 
 @Mapper(componentModel = "spring", imports = LocalDateTime.class)
 public interface UsuarioMapper {
@@ -17,6 +21,11 @@ public interface UsuarioMapper {
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dataUltimaAlteracao", ignore = true)
     Usuario mapToUsuario(UsuarioCreateDto usuarioCreateDto);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "senha", ignore = true)
+    @Mapping(target = "dataUltimaAlteracao", ignore = true)
+    Usuario mapToUsuario(UsuarioUpdateDto usuarioUpdateDto);
 
     UsuarioResponseDto mapToUsuarioResponseDto(Usuario usuario);
 
@@ -27,4 +36,23 @@ public interface UsuarioMapper {
     UsuarioEntity mapToUsuarioEntity(Usuario usuario);
 
     Usuario mapToUsuario(UsuarioEntity usuarioEntity);
+
+    EnderecoEntity mapToEnderecoEntity(Endereco endereco);
+
+    default UsuarioEntity mapToUsuarioEntity(UsuarioEntity usuarioEntityAtual, Usuario usuario) {
+
+        var enderecoEntity = mapToEnderecoEntity(usuario.getEndereco());
+        var usuarioEntity = mapToUsuarioEntity(usuario);
+
+        if (nonNull(usuarioEntityAtual.getEndereco())) {
+
+            enderecoEntity.setId(usuarioEntityAtual.getEndereco().getId());
+        }
+
+        usuarioEntity.setId(usuarioEntityAtual.getId());
+        usuarioEntity.setSenha(usuarioEntityAtual.getSenha());
+        usuarioEntity.setEndereco(enderecoEntity);
+
+        return usuarioEntity;
+    }
 }

@@ -21,10 +21,7 @@ public class UsuarioService {
 
     public Usuario incluir(Usuario usuario) {
 
-        usuarioRepository.findByLogin(usuario.getLogin())
-                .ifPresent(usuarioEntity -> {
-                    throw new BusinessException(format("Login {0} não está disponível.", usuario.getLogin()));
-                });
+        validarDisponibilidadeLogin(usuario.getLogin());
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
         var usuarioEntity = usuarioRepository.save(usuarioMapper.mapToUsuarioEntity(usuario));
@@ -37,5 +34,31 @@ public class UsuarioService {
         return usuarioRepository.findById(id)
                 .map(usuarioMapper::mapToUsuario)
                 .orElseThrow(() -> new NotFoundException(format("Usuário não encontrado com ID {0}.", id)));
+    }
+
+    public Usuario atualizar(Long id, Usuario usuario) {
+
+        var usuarioEntityAtual = usuarioRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(format("Usuário não encontrado com ID {0}.", id)));
+
+        validarDisponibilidadeLogin(usuario.getLogin());
+
+        var usuarioEntity = usuarioMapper.mapToUsuarioEntity(usuarioEntityAtual, usuario);
+
+        return usuarioMapper.mapToUsuario(usuarioRepository.save(usuarioEntity));
+    }
+
+    public void excluir(Long id) {
+
+        buscarPorId(id);
+        usuarioRepository.deleteById(id);
+    }
+
+    public void validarDisponibilidadeLogin(String login) {
+
+        usuarioRepository.findByLogin(login)
+                .ifPresent(usuarioEntity -> {
+                    throw new BusinessException(format("Login {0} não está disponível.", login));
+                });
     }
 }
