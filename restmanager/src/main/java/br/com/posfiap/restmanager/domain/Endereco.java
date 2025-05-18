@@ -2,7 +2,6 @@ package br.com.posfiap.restmanager.domain;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.Value;
 
 @Data
 @Builder
@@ -25,6 +24,4 @@ public class Endereco {
     String estado;
 
     String pais;
-
-    Long id_usuario;
 }
