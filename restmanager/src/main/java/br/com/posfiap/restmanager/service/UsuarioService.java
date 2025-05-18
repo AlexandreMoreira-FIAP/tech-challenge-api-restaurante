@@ -10,10 +10,14 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import static java.text.MessageFormat.format;
+import static java.time.LocalDateTime.now;
 
 @Component
 @RequiredArgsConstructor
 public class UsuarioService {
+
+    private static final String USUARIO_NAO_ENCONTRADO = "Usuário não encontrado com ID {0}.";
+    private static final String LOGIN_INDISPONIVEL = "Login {0} não está disponível.";
 
     private final UsuarioMapper usuarioMapper;
     private final UsuarioRepository usuarioRepository;
@@ -33,13 +37,13 @@ public class UsuarioService {
 
         return usuarioRepository.findById(id)
                 .map(usuarioMapper::mapToUsuario)
-                .orElseThrow(() -> new NotFoundException(format("Usuário não encontrado com ID {0}.", id)));
+                .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
     }
 
     public Usuario atualizar(Long id, Usuario usuario) {
 
         var usuarioEntityAtual = usuarioRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(format("Usuário não encontrado com ID {0}.", id)));
+                .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
 
         validarDisponibilidadeLogin(usuario.getLogin());
 
@@ -54,11 +58,22 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
+    public void alterarSenha(Long id, String senha) {
+
+        var usuarioEntity = usuarioRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
+
+        usuarioEntity.setSenha(passwordEncoder.encode(senha));
+        usuarioEntity.setDataUltimaAlteracao(now());
+
+        usuarioRepository.save(usuarioEntity);
+    }
+
     public void validarDisponibilidadeLogin(String login) {
 
         usuarioRepository.findByLogin(login)
                 .ifPresent(usuarioEntity -> {
-                    throw new BusinessException(format("Login {0} não está disponível.", login));
+                    throw new BusinessException(format(LOGIN_INDISPONIVEL, login));
                 });
     }
 }

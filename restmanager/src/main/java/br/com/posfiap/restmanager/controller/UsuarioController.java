@@ -1,5 +1,6 @@
 package br.com.posfiap.restmanager.controller;
 
+import br.com.posfiap.restmanager.dto.SenhaDto;
 import br.com.posfiap.restmanager.dto.UsuarioCreateDto;
 import br.com.posfiap.restmanager.dto.UsuarioResponseDto;
 import br.com.posfiap.restmanager.dto.UsuarioUpdateDto;
@@ -22,9 +23,10 @@ import static org.springframework.http.HttpStatus.NO_CONTENT;
 class UsuarioController {
 
     private static final String INCLUIR_USUARIO = "incluir usuário";
-    private static final String CONSULTAR_USUARIO_POR_ID = "consultar usuário com ID {0}";
+    private static final String CONSULTAR_USUARIO = "consultar usuário com ID {0}";
     private static final String ATUALIZAR_USUARIO = "atualizar usuário com ID {0}";
     private static final String EXCLUIR_USUARIO = "excluir usuário com ID {0}";
+    private static final String ALTERAR_SENHA_USUARIO = "alterar senha do usuário com ID {0}";
 
     private final UsuarioService usuarioService;
     private final UsuarioMapper usuarioMapper;
@@ -47,12 +49,12 @@ class UsuarioController {
     @Operation(summary = "Consultar usuário")
     UsuarioResponseDto buscarPorId(@PathVariable Long id) {
 
-        logRequestController(format(CONSULTAR_USUARIO_POR_ID, id));
+        logRequestController(format(CONSULTAR_USUARIO, id));
 
         var usuario = usuarioService.buscarPorId(id);
         var usuarioResponseDto = usuarioMapper.mapToUsuarioResponseDto(usuario);
 
-        logResponseController(format(CONSULTAR_USUARIO_POR_ID, id), usuarioResponseDto);
+        logResponseController(format(CONSULTAR_USUARIO, id), usuarioResponseDto);
         return usuarioResponseDto;
     }
 
@@ -79,5 +81,17 @@ class UsuarioController {
         usuarioService.excluir(id);
 
         logResponseController(format(EXCLUIR_USUARIO, id));
+    }
+
+    @PatchMapping("{id}/senha")
+    @ResponseStatus(NO_CONTENT)
+    @Operation(summary = "Alterar senha do usuário")
+    void alterarSenha(@PathVariable Long id, @RequestBody @Valid SenhaDto senhaDto) {
+
+        logRequestController(format(ALTERAR_SENHA_USUARIO, id));
+
+        usuarioService.alterarSenha(id, senhaDto.getSenha());
+
+        logResponseController(format(ALTERAR_SENHA_USUARIO, id));
     }
 }
