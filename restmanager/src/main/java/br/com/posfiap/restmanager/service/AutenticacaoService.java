@@ -9,18 +9,24 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class AutenticacaoService {
 
+    private static final String AUTENTICACAO_INVALIDA = "Login ou senha incorreto.";
+
     private final PasswordEncoder passwordEncoder;
+    private final UsuarioService usuarioService;
 
-    public String criptografarSenha(String senha) {
+    public void autenticarLogin(String login, String senha) {
 
-        return passwordEncoder.encode(senha);
+        usuarioService.buscarPorLogin(login).ifPresentOrElse(usuario -> {
+
+            if (!passwordEncoder.matches(senha, usuario.getSenha())) {
+
+                autenticacaoInvalida();
+            }
+        }, this::autenticacaoInvalida);
     }
 
-    public void validarSenha(String senha, String senhaCriptografada) {
+    private void autenticacaoInvalida() {
 
-        if (!passwordEncoder.matches(senha, senhaCriptografada)) {
-
-            throw new AuthenticationException("Senha incorreta.");
-        }
+        throw new AuthenticationException(AUTENTICACAO_INVALIDA);
     }
 }
