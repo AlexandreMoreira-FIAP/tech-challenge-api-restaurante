@@ -21,13 +21,13 @@ public class UsuarioService {
 
     private final UsuarioMapper usuarioMapper;
     private final UsuarioRepository usuarioRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final AutenticacaoService autenticacaoService;
 
     public Usuario incluir(Usuario usuario) {
 
         validarDisponibilidadeLogin(usuario.getLogin());
 
-        usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
+        usuario.setSenha(autenticacaoService.criptografarSenha(usuario.getSenha()));
         var usuarioEntity = usuarioRepository.save(usuarioMapper.mapToUsuarioEntity(usuario));
 
         return usuarioMapper.mapToUsuario(usuarioEntity);
@@ -58,18 +58,20 @@ public class UsuarioService {
         usuarioRepository.deleteById(id);
     }
 
-    public void alterarSenha(Long id, String senha) {
+    public void alterarSenha(Long id, String senhaAtual, String novaSenha) {
 
         var usuarioEntity = usuarioRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
 
-        usuarioEntity.setSenha(passwordEncoder.encode(senha));
+        autenticacaoService.validarSenha(senhaAtual, usuarioEntity.getSenha());
+
+        usuarioEntity.setSenha(autenticacaoService.criptografarSenha(novaSenha));
         usuarioEntity.setDataUltimaAlteracao(now());
 
         usuarioRepository.save(usuarioEntity);
     }
 
-    public void validarDisponibilidadeLogin(String login) {
+    private void validarDisponibilidadeLogin(String login) {
 
         usuarioRepository.findByLogin(login)
                 .ifPresent(usuarioEntity -> {

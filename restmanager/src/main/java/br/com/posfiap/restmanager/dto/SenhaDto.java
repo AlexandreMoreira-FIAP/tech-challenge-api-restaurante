@@ -9,5 +9,8 @@ import lombok.Value;
 public class SenhaDto {
 
     @NotBlank
-    String senha;
+    String senhaAtual;
+
+    @NotBlank
+    String novaSenha;
 }

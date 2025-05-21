@@ -12,8 +12,7 @@ import java.util.HashMap;
 import static br.com.posfiap.restmanager.util.Logger.logError;
 import static java.text.MessageFormat.format;
 import static java.time.LocalDateTime.now;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
-import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.HttpStatus.*;
 
 @ControllerAdvice
 class DefaultExceptionHandler {
@@ -47,6 +46,15 @@ class DefaultExceptionHandler {
         logError(ex.getMessage(), ex);
         return ResponseEntity
                 .status(UNPROCESSABLE_ENTITY)
+                .body(ex.getErroResponseDto());
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErroResponseDto> handleAuthenticationException(AuthenticationException ex) {
+
+        logError(ex.getMessage(), ex);
+        return ResponseEntity
+                .status(UNAUTHORIZED)
                 .body(ex.getErroResponseDto());
     }
 

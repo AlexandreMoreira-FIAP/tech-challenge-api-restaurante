@@ -90,7 +90,7 @@ class UsuarioController {
 
         logRequestController(format(ALTERAR_SENHA_USUARIO, id));
 
-        usuarioService.alterarSenha(id, senhaDto.getSenha());
+        usuarioService.alterarSenha(id, senhaDto.getSenhaAtual(), senhaDto.getNovaSenha());
 
         logResponseController(format(ALTERAR_SENHA_USUARIO, id));
     }
