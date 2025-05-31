@@ -35,8 +35,16 @@ Isso vai iniciar:
 ## 🌐 Acessar o Swagger
 - http://localhost:8081/swagger-ui.html
 
-##  Collection para testar a API
-- [Collection](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/Collections/CollectionAPI-Restaurante.json)
+## 📥 Collection para Testes no Postman
+
+Para facilitar os testes da API, disponibilizamos duas versões da collection do Postman:
+
+- **Collection com payloads vazios**: Ideal para quem deseja preencher os dados manualmente e testar diferentes cenários.
+- **Collection com payloads preenchidos**: Contém exemplos completos prontos para envio, útil para testes rápidos.
+
+🔗 [BaixarCollection](https://raw.githubusercontent.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/feature/alexandre/Collections/CollectionAPI-Restaurante.json)
+
+> 💡 Basta importar o arquivo no Postman e começar a testar os endpoints da API.
 
 ## 📈 Banco de Dados
 
