@@ -5,9 +5,9 @@
 
 ## ✨ Requisitos
 
+- [Java17](https://www.oracle.com/br/java/technologies/downloads/)
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Git](https://git-scm.com/)
-- [Java17](https://www.oracle.com/br/java/technologies/downloads/)
 
 ---
 
