@@ -1,84 +1,50 @@
-# 💾 RestManager API
 
-API REST em Java com Spring Boot para gerenciamento de restaurantes. Integração com PostgreSQL via Docker Compose.
+# 🧩 Descrição do Problema
 
----
+Um grupo de restaurantes da região enfrentava altos custos com sistemas de gestão individuais. Para reduzir despesas, decidiram criar um sistema único e compartilhado, desenvolvido por estudantes.
 
-## ✨ Requisitos
+O sistema permitirá que cada restaurante gerencie suas operações, enquanto os clientes poderão consultar informações, avaliar e fazer pedidos online. Como há restrições financeiras, o desenvolvimento será feito por fases, permitindo ajustes conforme o uso.
 
-- [Docker](https://www.docker.com/products/docker-desktop)
-- [Git](https://git-scm.com/)
+# ✅ Solução
 
----
+Foi desenvolvida uma API RESTful utilizando os seguintes recursos e tecnologias:
 
-## 📦 Como clonar e executar
+- **Spring Boot 3.4.5** – Framework principal para construção da aplicação.
+- **Java 17** – Linguagem de programação utilizada.
+- **Docker** – Para execução da aplicação em containers.
+- **PostgreSQL** – Banco de dados relacional utilizado.
+- **Swagger (Springdoc OpenAPI)** – Para geração automática da documentação da API.
+- **MapStruct** – Para mapeamento entre DTOs e entidades.
+- **Lombok** – Para reduzir código boilerplate (getters, setters, etc.).
+- **Spring Security** – Para implementação de segurança básica.
+- **Bean Validation (javax.validation)** – Para validação dos dados de entrada.
 
-### 1. Clone o repositório
 
-```bash
-git clone https://github.com/seu-usuario/restmanager.git
-cd restmanager
-```
+# 🏗️ Arquitetura
 
-### 2. Suba os containers com Docker Compose
+O projeto adota a Arquitetura em Camadas, promovendo uma estrutura organizada e escalável. Essa abordagem garante separação de responsabilidades, facilitando a manutenção, testes e evolução do sistema. Além disso, seguimos os princípios SOLID para garantir um código limpo, coeso e de fácil extensão.
 
-```bash
-docker-compose up --build
-```
+As principais camadas são:
 
-Isso vai iniciar:
-- A API na porta **8081**
-- O banco PostgreSQL na porta **5432**
+- **Controller**: Responsável por receber as requisições HTTP e retornar respostas adequadas.
+- **Service**: Contém a lógica de negócio, centralizando as regras da aplicação.
+- **Repository**: Camada de persistência, utilizando o Spring Data JPA para abstrair operações com o banco de dados.
+- **DTOs + MapStruct**: Os DTOs são usados para isolar a representação dos dados da entidade de domínio. O MapStruct automatiza o mapeamento entre DTOs e entidades.
+- **Entity**: Representa as tabelas do banco de dados na forma de objetos Java.
+- **Validação**: Utiliza anotações do Bean Validation para validar os dados de entrada antes do processamento.
 
----
 
-## ✅ Testar a API
+# Desenho da Solução
 
-### Endpoint de teste (GET)
 
-```http
-GET http://localhost:8081/hello
-```
 
-Resposta esperada:
-```text
-Olá, mundo!
-```
+# 📚 Documentações Complementares
 
----
+- 🚀 Guia de Execução Local: Instruções para clonar o projeto, subir os containers com Docker e acessar a aplicação.
+[Guia](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/GuiaRodarLocal.md)
 
-## 📈 Banco de Dados
+- 🔌 Endpoints da API: Detalhamento completo das rotas disponíveis, com exemplos de requisição 
+[Endpoints](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/Endpoints.md)
 
-O banco PostgreSQL é criado com as seguintes credenciais:
-
-- **Database:** restdb
-- **User:** restuser
-- **Password:** restpass
-- **Porta:** 5432
-
-Você pode se conectar ao banco usando clientes como DBeaver, TablePlus ou via linha de comando:
-
-```bash
-psql -h localhost -p 5432 -U restuser -d restdb
-```
-
----
-
-## ♻ Parar os containers
-
-```bash
-docker-compose down
-```
-
----
-
-## 🚀 Em desenvolvimento
-
-Em breve:
-- CRUD completo de restaurantes
-- Autenticação com JWT
-- Testes automatizados
-
----
-
-Feito com ❤
+- Modelagem de Dados: Estrutura das entidades e seus relacionamentos
+[Modelagem](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/ModelagemDeDados.md) 
