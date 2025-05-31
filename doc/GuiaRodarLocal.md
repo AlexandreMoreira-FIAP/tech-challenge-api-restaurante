@@ -32,7 +32,7 @@ Isso vai iniciar:
 
 ---
 
-##  Acessar o Swagger
+## 🌐 Acessar o Swagger
 - http://localhost:8081/swagger-ui.html
 
 ## 📈 Banco de Dados
