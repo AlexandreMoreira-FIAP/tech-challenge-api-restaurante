@@ -32,6 +32,9 @@ Isso vai iniciar:
 
 ---
 
+##  Acessar o Swagger
+- http://localhost:8081/swagger-ui.html
+
 ## 📈 Banco de Dados
 
 O banco PostgreSQL é criado com as seguintes credenciais:
