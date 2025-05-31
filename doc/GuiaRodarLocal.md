@@ -42,7 +42,7 @@ Para facilitar os testes da API, disponibilizamos duas versões da collection do
 - **Collection com payloads vazios**: Ideal para quem deseja preencher os dados manualmente e testar diferentes cenários.
 - **Collection com payloads preenchidos**: Contém exemplos completos prontos para envio, útil para testes rápidos.
 
-🔗 [BaixarCollection](https://raw.githubusercontent.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/feature/alexandre/Collections/CollectionAPI-Restaurante.json)
+🔗 [BaixarCollections](https://raw.githubusercontent.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/feature/alexandre/Collections/CollectionAPI-Restaurante.json)
 
 > 💡 Basta importar o arquivo no Postman e começar a testar os endpoints da API.
 
