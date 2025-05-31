@@ -41,10 +41,10 @@ As principais camadas são:
 # 📚 Documentações Complementares
 
 - 🚀 Guia de Execução Local: Instruções para clonar o projeto, subir os containers com Docker e acessar a aplicação.
-[Guia](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/GuiaRodarLocal.md)
+- [Guia](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/GuiaRodarLocal.md)
 
 - 🔌 Endpoints da API: Detalhamento completo das rotas disponíveis, com exemplos de requisição 
-[Endpoints](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/Endpoints.md)
+- [Endpoints](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/Endpoints.md)
 
 - Modelagem de Dados: Estrutura das entidades e seus relacionamentos
-[Modelagem](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/ModelagemDeDados.md) 
+- [Modelagem](https://github.com/AlexandreMoreira-FIAP/tech-challenge-api-restaurante/blob/feature/alexandre/doc/ModelagemDeDados.md) 
