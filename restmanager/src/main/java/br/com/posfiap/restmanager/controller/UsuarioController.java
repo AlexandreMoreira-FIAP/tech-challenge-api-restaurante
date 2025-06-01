@@ -6,21 +6,16 @@ import br.com.posfiap.restmanager.dto.UsuarioResponseDto;
 import br.com.posfiap.restmanager.dto.UsuarioUpdateDto;
 import br.com.posfiap.restmanager.mapper.UsuarioMapper;
 import br.com.posfiap.restmanager.service.UsuarioService;
-import io.swagger.v3.oas.annotations.Operation;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RestController;
 
 import static br.com.posfiap.restmanager.util.Logger.logRequestController;
 import static br.com.posfiap.restmanager.util.Logger.logResponseController;
 import static java.text.MessageFormat.format;
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/usuarios")
-class UsuarioController {
+class UsuarioController implements UsuarioApi {
 
     private static final String INCLUIR_USUARIO = "incluir usuário";
     private static final String CONSULTAR_USUARIO = "consultar usuário com ID {0}";
@@ -31,10 +26,8 @@ class UsuarioController {
     private final UsuarioService usuarioService;
     private final UsuarioMapper usuarioMapper;
 
-    @PostMapping
-    @ResponseStatus(CREATED)
-    @Operation(summary = "Incluir usuário")
-    UsuarioResponseDto incluir(@RequestBody @Valid UsuarioCreateDto usuarioCreateDto) {
+    @Override
+    public UsuarioResponseDto incluir(UsuarioCreateDto usuarioCreateDto) {
 
         logRequestController(INCLUIR_USUARIO, usuarioCreateDto);
 
@@ -45,9 +38,8 @@ class UsuarioController {
         return usuarioResponseDto;
     }
 
-    @GetMapping("{id}")
-    @Operation(summary = "Consultar usuário")
-    UsuarioResponseDto buscarPorId(@PathVariable Long id) {
+    @Override
+    public UsuarioResponseDto buscarPorId(Long id) {
 
         logRequestController(format(CONSULTAR_USUARIO, id));
 
@@ -58,9 +50,8 @@ class UsuarioController {
         return usuarioResponseDto;
     }
 
-    @PutMapping("{id}")
-    @Operation(summary = "Atualizar usuário")
-    UsuarioResponseDto atualizar(@PathVariable Long id, @RequestBody @Valid UsuarioUpdateDto usuarioUpdateDto) {
+    @Override
+    public UsuarioResponseDto atualizar(Long id, UsuarioUpdateDto usuarioUpdateDto) {
 
         logRequestController(format(ATUALIZAR_USUARIO, id), usuarioUpdateDto);
 
@@ -71,10 +62,8 @@ class UsuarioController {
         return usuarioResponseDto;
     }
 
-    @DeleteMapping("{id}")
-    @ResponseStatus(NO_CONTENT)
-    @Operation(summary = "Excluir usuário")
-    void excluir(@PathVariable Long id) {
+    @Override
+    public void excluir(Long id) {
 
         logRequestController(format(EXCLUIR_USUARIO, id));
 
@@ -83,10 +72,8 @@ class UsuarioController {
         logResponseController(format(EXCLUIR_USUARIO, id));
     }
 
-    @PatchMapping("{id}/senha")
-    @ResponseStatus(NO_CONTENT)
-    @Operation(summary = "Alterar senha do usuário")
-    void alterarSenha(@PathVariable Long id, @RequestBody @Valid SenhaDto senhaDto) {
+    @Override
+    public void alterarSenha(Long id, SenhaDto senhaDto) {
 
         logRequestController(format(ALTERAR_SENHA_USUARIO, id));
 

@@ -13,8 +13,6 @@ import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 
-import static java.util.Objects.nonNull;
-
 @Mapper(componentModel = "spring", imports = LocalDateTime.class)
 public interface UsuarioMapper {
 
@@ -38,21 +36,4 @@ public interface UsuarioMapper {
     Usuario mapToUsuario(UsuarioEntity usuarioEntity);
 
     EnderecoEntity mapToEnderecoEntity(Endereco endereco);
-
-    default UsuarioEntity mapToUsuarioEntity(UsuarioEntity usuarioEntityAtual, Usuario usuario) {
-
-        var enderecoEntity = mapToEnderecoEntity(usuario.getEndereco());
-        var usuarioEntity = mapToUsuarioEntity(usuario);
-
-        if (nonNull(usuarioEntityAtual.getEndereco())) {
-
-            enderecoEntity.setId(usuarioEntityAtual.getEndereco().getId());
-        }
-
-        usuarioEntity.setId(usuarioEntityAtual.getId());
-        usuarioEntity.setSenha(usuarioEntityAtual.getSenha());
-        usuarioEntity.setEndereco(enderecoEntity);
-
-        return usuarioEntity;
-    }
 }

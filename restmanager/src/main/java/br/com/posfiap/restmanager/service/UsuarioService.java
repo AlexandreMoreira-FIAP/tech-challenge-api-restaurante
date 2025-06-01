@@ -1,11 +1,9 @@
 package br.com.posfiap.restmanager.service;
 
 import br.com.posfiap.restmanager.domain.Usuario;
-import br.com.posfiap.restmanager.entity.UsuarioEntity;
 import br.com.posfiap.restmanager.error.AuthenticationException;
 import br.com.posfiap.restmanager.error.BusinessException;
 import br.com.posfiap.restmanager.error.NotFoundException;
-import br.com.posfiap.restmanager.mapper.UsuarioMapper;
 import br.com.posfiap.restmanager.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +13,8 @@ import java.util.Optional;
 
 import static java.text.MessageFormat.format;
 import static java.time.LocalDateTime.now;
+import static java.util.Objects.nonNull;
+import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +24,6 @@ public class UsuarioService {
     private static final String LOGIN_INDISPONIVEL = "Login {0} não está disponível.";
     private static final String SENHA_INCORRETA = "Senha incorreta.";
 
-    private final UsuarioMapper usuarioMapper;
     private final UsuarioRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,66 +32,70 @@ public class UsuarioService {
         validarDisponibilidadeLogin(usuario.getLogin());
 
         usuario.setSenha(passwordEncoder.encode(usuario.getSenha()));
-        var usuarioEntity = usuarioRepository.save(usuarioMapper.mapToUsuarioEntity(usuario));
 
-        return usuarioMapper.mapToUsuario(usuarioEntity);
+        return usuarioRepository.salvar(usuario);
     }
 
     public Usuario buscarPorId(Long id) {
 
-        return usuarioRepository.findById(id)
-                .map(usuarioMapper::mapToUsuario)
+        return usuarioRepository.buscarPorId(id)
                 .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
-    }
-
-    public Usuario atualizar(Long id, Usuario usuario) {
-
-        var usuarioEntityAtual = usuarioRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
-
-        validarDisponibilidadeLogin(usuario.getLogin());
-
-        var usuarioEntity = usuarioMapper.mapToUsuarioEntity(usuarioEntityAtual, usuario);
-
-        return usuarioMapper.mapToUsuario(usuarioRepository.save(usuarioEntity));
     }
 
     public void excluir(Long id) {
 
         buscarPorId(id);
-        usuarioRepository.deleteById(id);
-    }
-
-    public void alterarSenha(Long id, String senhaAtual, String novaSenha) {
-
-        var usuarioEntity = usuarioRepository.findById(id)
-                .orElseThrow(() -> new NotFoundException(format(USUARIO_NAO_ENCONTRADO, id)));
-
-        validarSenha(senhaAtual, usuarioEntity);
-
-        usuarioEntity.setSenha(passwordEncoder.encode(novaSenha));
-        usuarioEntity.setDataUltimaAlteracao(now());
-
-        usuarioRepository.save(usuarioEntity);
+        usuarioRepository.excluir(id);
     }
 
     public Optional<Usuario> buscarPorLogin(String login) {
 
-        return usuarioRepository.findByLogin(login)
-                .map(usuarioMapper::mapToUsuario);
+        return usuarioRepository.buscarPorLogin(login);
+    }
+
+    public void alterarSenha(Long id, String senhaAtual, String novaSenha) {
+
+        var usuario = buscarPorId(id);
+
+        validarSenha(senhaAtual, usuario);
+
+        usuario.setSenha(passwordEncoder.encode(novaSenha));
+        usuario.setDataUltimaAlteracao(now());
+
+        usuarioRepository.salvar(usuario);
+    }
+
+    public Usuario atualizar(Long id, Usuario usuario) {
+
+        var usuarioAtual = buscarPorId(id);
+
+        if (isNotBlank(usuarioAtual.getLogin()) && !usuarioAtual.getLogin().equals(usuario.getLogin())) {
+
+            validarDisponibilidadeLogin(usuario.getLogin());
+        }
+
+        if (nonNull(usuarioAtual.getEndereco()) && nonNull(usuario.getEndereco())) {
+
+            usuario.getEndereco().setId(usuarioAtual.getEndereco().getId());
+        }
+
+        usuario.setId(usuarioAtual.getId());
+        usuario.setSenha(usuarioAtual.getSenha());
+
+        return usuarioRepository.salvar(usuario);
     }
 
     private void validarDisponibilidadeLogin(String login) {
 
-        usuarioRepository.findByLogin(login)
-                .ifPresent(usuarioEntity -> {
+        usuarioRepository.buscarPorLogin(login)
+                .ifPresent(usuario -> {
                     throw new BusinessException(format(LOGIN_INDISPONIVEL, login));
                 });
     }
 
-    private void validarSenha(String senhaAtual, UsuarioEntity usuarioEntity) {
+    private void validarSenha(String senhaAtual, Usuario usuario) {
 
-        if (!passwordEncoder.matches(senhaAtual, usuarioEntity.getSenha())) {
+        if (!passwordEncoder.matches(senhaAtual, usuario.getSenha())) {
 
             throw new AuthenticationException(SENHA_INCORRETA);
         }

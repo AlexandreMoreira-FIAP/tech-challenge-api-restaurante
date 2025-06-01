@@ -1,11 +1,16 @@
 package br.com.posfiap.restmanager.repository;
 
-import br.com.posfiap.restmanager.entity.UsuarioEntity;
-import org.springframework.data.jpa.repository.JpaRepository;
+import br.com.posfiap.restmanager.domain.Usuario;
 
 import java.util.Optional;
 
-public interface UsuarioRepository extends JpaRepository<UsuarioEntity, Long> {
+public interface UsuarioRepository {
 
-    Optional<UsuarioEntity> findByLogin(String login);
+    Usuario salvar(Usuario usuario);
+
+    Optional<Usuario> buscarPorId(Long id);
+
+    void excluir(Long id);
+
+    Optional<Usuario> buscarPorLogin(String login);
 }
