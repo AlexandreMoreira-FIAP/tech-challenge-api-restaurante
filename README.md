@@ -35,6 +35,7 @@ As principais camadas são:
 
 
 # Desenho da Solução
+- Fluxo de inclusão de um cliente.
 ![Desenho_Arquitetura](https://github.com/user-attachments/assets/8884678e-876c-4333-b871-e53077a74dc8)
 
 
