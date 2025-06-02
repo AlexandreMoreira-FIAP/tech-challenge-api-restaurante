@@ -32,7 +32,7 @@ class DefaultExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<ErroResponseDto> handleNotFoundException(NotFoundException ex) {
+    ResponseEntity<ErroResponseDto> handleNotFoundException(NotFoundException ex) {
 
         logError(ex.getMessage(), ex);
         return ResponseEntity
@@ -41,7 +41,7 @@ class DefaultExceptionHandler {
     }
 
     @ExceptionHandler(BusinessException.class)
-    public ResponseEntity<ErroResponseDto> handleBusinessException(BusinessException ex) {
+    ResponseEntity<ErroResponseDto> handleBusinessException(BusinessException ex) {
 
         logError(ex.getMessage(), ex);
         return ResponseEntity
@@ -50,7 +50,7 @@ class DefaultExceptionHandler {
     }
 
     @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<ErroResponseDto> handleAuthenticationException(AuthenticationException ex) {
+    ResponseEntity<ErroResponseDto> handleAuthenticationException(AuthenticationException ex) {
 
         logError(ex.getMessage(), ex);
         return ResponseEntity
