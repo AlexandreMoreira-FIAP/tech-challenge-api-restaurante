@@ -142,5 +142,5 @@
 
 **Observações:**
 
-- Substitua `:id` nos endpoints pelos IDs reais dos usuários.
+- Substitua `{id}` nos endpoints pelos IDs reais dos usuários.
 - Os exemplos de body podem ser alterados conforme a necessidade da requisição.
