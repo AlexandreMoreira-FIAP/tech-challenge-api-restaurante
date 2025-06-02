@@ -1,7 +1,7 @@
 ## Buscar Usuário por ID
 
 - **Método:** GET
-- **URL:** `http://localhost:8081/v1/usuarios/:id`
+- **URL:** `http://localhost:8081/v1/usuarios/{id}`
 - **Descrição:** Busca os dados do usuário pelo ID informado na URL.
 
 ### Parâmetros de URL
@@ -47,7 +47,7 @@
 ## Deletar Usuário por ID
 
 - **Método:** DELETE
-- **URL:** `http://localhost:8081/v1/usuarios/:id`
+- **URL:** `http://localhost:8081/v1/usuarios/{id}`
 - **Headers:**
     - `Accept: */*`
 
@@ -62,7 +62,7 @@
 ## Atualizar Usuário por ID
 
 - **Método:** PUT
-- **URL:** `http://localhost:8081/v1/usuarios/:id`
+- **URL:** `http://localhost:8081/v1/usuarios/{id}`
 - **Headers:**
     - `Accept: */*`
     - `Content-Type: application/json`
@@ -99,7 +99,7 @@
 ## Atualizar a senha do Usuário por ID
 
 - **Método:** PATCH
-- **URL:** `http://localhost:8081/v1/usuarios/:id/senha`
+- **URL:** `http://localhost:8081/v1/usuarios/{id}/senha`
 - **Headers:**
     - `Accept: */*`
     - `Content-Type: application/json`
