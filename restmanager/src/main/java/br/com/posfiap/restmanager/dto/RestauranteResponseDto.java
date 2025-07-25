@@ -29,4 +29,6 @@ public class RestauranteResponseDto {
 
     LocalDateTime dataUltimaAlteracao;
 
+    List<UsuarioSimpleDto> usuarios;
+
 }

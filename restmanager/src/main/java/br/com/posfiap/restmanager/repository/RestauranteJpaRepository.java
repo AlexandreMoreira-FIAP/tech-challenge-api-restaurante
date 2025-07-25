@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-interface RestauranteJpaRepository extends JpaRepository<RestauranteEntity, Long> {
+public interface RestauranteJpaRepository extends JpaRepository<RestauranteEntity, Long> {
 
     Optional<RestauranteEntity> findByLogin(String login);
 }
