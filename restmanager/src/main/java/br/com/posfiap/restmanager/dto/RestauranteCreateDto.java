@@ -1,27 +1,32 @@
 package br.com.posfiap.restmanager.dto;
 
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
-import br.com.posfiap.restmanager.entity.RestauranteEntity;
+import br.com.posfiap.restmanager.entity.UsuarioEntity;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
+import lombok.ToString;
 import lombok.Value;
 
 import java.util.List;
 
 @Value
 @Builder
-public class UsuarioUpdateDto {
+@ToString(exclude = "senha")
+public class RestauranteCreateDto {
 
     @NotBlank
     String nome;
 
     @NotBlank
-    String email;
+    String login;
 
     @NotBlank
-    String login;
+    String senha;
+
+    @NotBlank
+    String tipoDeCozinha;
 
     @NotNull
     TipoUsuario tipoUsuario;

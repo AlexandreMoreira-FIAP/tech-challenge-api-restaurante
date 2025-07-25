@@ -1,22 +1,23 @@
-package br.com.posfiap.restmanager.domain;
+package br.com.posfiap.restmanager.dto;
 
+import br.com.posfiap.restmanager.domain.Endereco;
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
-import br.com.posfiap.restmanager.entity.RestauranteEntity;
+import br.com.posfiap.restmanager.entity.UsuarioEntity;
 import lombok.Builder;
-import lombok.Data;
+import lombok.Value;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
+@Value
 @Builder
-public class Usuario {
+public class RestauranteResponseDto {
 
     Long id;
 
     String nome;
 
-    String email;
+    String tipoDeCozinha;
 
     String login;
 
@@ -28,5 +29,4 @@ public class Usuario {
 
     LocalDateTime dataUltimaAlteracao;
 
-    private List<RestauranteEntity> restaurantes;
 }

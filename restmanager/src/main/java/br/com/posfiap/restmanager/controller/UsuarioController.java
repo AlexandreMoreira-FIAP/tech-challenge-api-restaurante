@@ -5,9 +5,9 @@ import br.com.posfiap.restmanager.dto.UsuarioCreateDto;
 import br.com.posfiap.restmanager.dto.UsuarioResponseDto;
 import br.com.posfiap.restmanager.dto.UsuarioUpdateDto;
 import br.com.posfiap.restmanager.mapper.UsuarioMapper;
-import br.com.posfiap.restmanager.service.UsuarioService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
+import br.com.posfiap.restmanager.service.UsuarioService;
 
 import static br.com.posfiap.restmanager.util.Logger.logRequestController;
 import static br.com.posfiap.restmanager.util.Logger.logResponseController;

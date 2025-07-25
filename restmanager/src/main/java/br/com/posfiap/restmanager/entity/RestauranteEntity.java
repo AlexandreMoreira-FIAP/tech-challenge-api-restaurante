@@ -1,5 +1,7 @@
 package br.com.posfiap.restmanager.entity;
 
+
+import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,22 +18,22 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "usuario")
-public class UsuarioEntity {
+@Table(name = "restaurante")
+public class RestauranteEntity {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    private Long id;
+    Long id;
 
-    private String nome;
+    String nome;
 
-    private String email;
+    String tipoDeCozinha;
 
-    private String login;
+    String login;
 
-    private String senha;
+    String senha;
 
-    private String tipoUsuario;
+    TipoUsuario tipoUsuario;
 
     private LocalDateTime dataUltimaAlteracao;
 
@@ -39,6 +41,12 @@ public class UsuarioEntity {
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private EnderecoEntity endereco;
 
-    @ManyToMany(mappedBy = "usuarios") // referência ao nome da lista em RestauranteEntity
-    private List<RestauranteEntity> restaurantes;
+    @ManyToMany(cascade = ALL)
+    @JoinTable(
+            name = "restaurante_usuario", // nome da tabela de junção
+            joinColumns = @JoinColumn(name = "restaurante_id"), // FK desta entidade
+            inverseJoinColumns = @JoinColumn(name = "usuario_id") // FK da outra entidade
+    )
+    private List<UsuarioEntity> usuarios;
+
 }

@@ -1,7 +1,7 @@
 package br.com.posfiap.restmanager.domain;
 
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
-import br.com.posfiap.restmanager.entity.RestauranteEntity;
+import br.com.posfiap.restmanager.entity.UsuarioEntity;
 import lombok.Builder;
 import lombok.Data;
 
@@ -10,13 +10,13 @@ import java.util.List;
 
 @Data
 @Builder
-public class Usuario {
+public class Restaurante {
 
     Long id;
 
     String nome;
 
-    String email;
+    String tipoDeCozinha;
 
     String login;
 
@@ -28,5 +28,5 @@ public class Usuario {
 
     LocalDateTime dataUltimaAlteracao;
 
-    private List<RestauranteEntity> restaurantes;
+    private List<UsuarioEntity> usuarios;
 }
