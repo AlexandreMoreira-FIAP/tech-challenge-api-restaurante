@@ -1,13 +1,13 @@
 package br.com.posfiap.restmanager.mapper;
 
-import br.com.posfiap.restmanager.domain.Endereco;
-import br.com.posfiap.restmanager.domain.Item;
+import br.com.posfiap.restmanager.domain.entities.Endereco;
+import br.com.posfiap.restmanager.domain.entities.Item;
 import br.com.posfiap.restmanager.dto.EnderecoDto;
 import br.com.posfiap.restmanager.dto.ItemCreateDto;
 import br.com.posfiap.restmanager.dto.ItemResponseDto;
 import br.com.posfiap.restmanager.dto.ItemUpdateDto;
-import br.com.posfiap.restmanager.entity.EnderecoEntity;
-import br.com.posfiap.restmanager.entity.ItemEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.EnderecoEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.ItemEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

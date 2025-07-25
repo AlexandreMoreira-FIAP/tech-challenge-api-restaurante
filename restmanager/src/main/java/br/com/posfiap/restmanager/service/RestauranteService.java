@@ -1,12 +1,12 @@
 package br.com.posfiap.restmanager.service;
 
-import br.com.posfiap.restmanager.domain.Restaurante;
+import br.com.posfiap.restmanager.domain.entities.Restaurante;
 
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
 import br.com.posfiap.restmanager.error.AuthenticationException;
 import br.com.posfiap.restmanager.error.BusinessException;
 import br.com.posfiap.restmanager.error.NotFoundException;
-import br.com.posfiap.restmanager.repository.RestauranteRepository;
+import br.com.posfiap.restmanager.infrastructure.adapters.persistence.RestauranteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

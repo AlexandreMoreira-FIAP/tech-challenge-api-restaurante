@@ -1,16 +1,16 @@
 package br.com.posfiap.restmanager.service;
 
-import br.com.posfiap.restmanager.domain.Restaurante;
-import br.com.posfiap.restmanager.domain.Usuario;
+import br.com.posfiap.restmanager.domain.entities.Restaurante;
+import br.com.posfiap.restmanager.domain.entities.Usuario;
 import br.com.posfiap.restmanager.dto.RestauranteResponseDto;
 import br.com.posfiap.restmanager.dto.UsuarioResponseDto;
-import br.com.posfiap.restmanager.entity.RestauranteEntity;
-import br.com.posfiap.restmanager.entity.UsuarioEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.RestauranteEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.UsuarioEntity;
 import br.com.posfiap.restmanager.error.NotFoundException;
 import br.com.posfiap.restmanager.mapper.RestauranteMapper;
 import br.com.posfiap.restmanager.mapper.UsuarioMapper;
-import br.com.posfiap.restmanager.repository.RestauranteJpaRepository;
-import br.com.posfiap.restmanager.repository.UsuarioJpaRepository;
+import br.com.posfiap.restmanager.infrastructure.adapters.persistence.RestauranteJpaRepository;
+import br.com.posfiap.restmanager.infrastructure.adapters.persistence.UsuarioJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

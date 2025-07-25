@@ -1,8 +1,8 @@
 package br.com.posfiap.restmanager.dto;
 
-import br.com.posfiap.restmanager.domain.Endereco;
+import br.com.posfiap.restmanager.domain.entities.Endereco;
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
-import br.com.posfiap.restmanager.entity.UsuarioEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.UsuarioEntity;
 import lombok.Builder;
 import lombok.Value;
 

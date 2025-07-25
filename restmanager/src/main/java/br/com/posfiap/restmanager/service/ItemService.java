@@ -1,10 +1,10 @@
 package br.com.posfiap.restmanager.service;
 
-import br.com.posfiap.restmanager.domain.Item;
+import br.com.posfiap.restmanager.domain.entities.Item;
 import br.com.posfiap.restmanager.error.AuthenticationException;
 import br.com.posfiap.restmanager.error.BusinessException;
 import br.com.posfiap.restmanager.error.NotFoundException;
-import br.com.posfiap.restmanager.repository.ItemRepository;
+import br.com.posfiap.restmanager.infrastructure.adapters.persistence.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

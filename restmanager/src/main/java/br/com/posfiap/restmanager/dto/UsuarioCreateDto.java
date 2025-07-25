@@ -1,7 +1,7 @@
 package br.com.posfiap.restmanager.dto;
 
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
-import br.com.posfiap.restmanager.entity.RestauranteEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.RestauranteEntity;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
