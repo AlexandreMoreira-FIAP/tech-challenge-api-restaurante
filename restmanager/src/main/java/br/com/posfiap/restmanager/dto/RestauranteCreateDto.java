@@ -28,10 +28,16 @@ public class RestauranteCreateDto {
     @NotBlank
     String tipoDeCozinha;
 
+    @NotBlank
+    String horarioFuncionamento;
+
     @NotNull
     TipoUsuario tipoUsuario;
 
     @Valid
     @NotNull
     EnderecoDto endereco;
+
+    @NotNull
+    Long usuarioProprietarioId;
 }

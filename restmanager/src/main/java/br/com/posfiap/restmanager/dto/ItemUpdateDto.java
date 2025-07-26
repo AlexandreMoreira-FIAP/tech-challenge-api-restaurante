@@ -26,4 +26,7 @@ public class ItemUpdateDto {
     @NotBlank
     String foto; // Caminho ou URL da foto
 
+    @NotNull
+    Long restauranteId;
+
 }

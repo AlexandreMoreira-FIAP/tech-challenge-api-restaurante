@@ -16,6 +16,8 @@ public class Restaurante {
 
     private String tipoDeCozinha;
 
+    private String horarioFuncionamento;
+
     private String login;
 
     private String senha;
@@ -25,4 +27,6 @@ public class Restaurante {
     private Endereco endereco;
 
     private LocalDateTime dataUltimaAlteracao;
+
+    private Usuario usuarioProprietario;
 }

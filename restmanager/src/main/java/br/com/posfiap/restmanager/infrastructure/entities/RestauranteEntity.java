@@ -29,6 +29,8 @@ public class RestauranteEntity {
 
     String tipoDeCozinha;
 
+    String horarioFuncionamento;
+
     String login;
 
     String senha;
@@ -41,11 +43,15 @@ public class RestauranteEntity {
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private EnderecoEntity endereco;
 
+    @ManyToOne
+    @JoinColumn(name = "usuario_proprietario_id")
+    private UsuarioEntity usuarioProprietario;
+
     @ManyToMany(cascade = ALL)
     @JoinTable(
-            name = "restaurante_usuario", // nome da tabela de junção
-            joinColumns = @JoinColumn(name = "restaurante_id"), // FK desta entidade
-            inverseJoinColumns = @JoinColumn(name = "usuario_id") // FK da outra entidade
+            name = "restaurante_usuario",
+            joinColumns = @JoinColumn(name = "restaurante_id"),
+            inverseJoinColumns = @JoinColumn(name = "usuario_id")
     )
     private List<UsuarioEntity> usuarios;
 

@@ -33,8 +33,8 @@ class TipoUsuarioControllerTest {
     @WithMockUser
     void deveListarTodosOsTiposDeUsuario() throws Exception {
         List<TipoUsuarioDto> tiposEsperados = Arrays.asList(
-            new TipoUsuarioDto("CLIENTE", "Cliente do restaurante"),
-            new TipoUsuarioDto("PROPRIETARIO", "Proprietário do restaurante")
+            new TipoUsuarioDto(1L, "CLIENTE", "Cliente do restaurante"),
+            new TipoUsuarioDto(2L, "PROPRIETARIO", "Proprietário do restaurante")
         );
 
         when(tipoUsuarioService.listarTodos()).thenReturn(tiposEsperados);

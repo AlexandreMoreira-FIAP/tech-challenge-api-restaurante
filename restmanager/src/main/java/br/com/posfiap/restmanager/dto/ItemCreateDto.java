@@ -28,4 +28,7 @@ public class ItemCreateDto {
     @NotBlank
     String foto; // Caminho ou URL da foto
 
+    @NotNull
+    Long restauranteId;
+
 }

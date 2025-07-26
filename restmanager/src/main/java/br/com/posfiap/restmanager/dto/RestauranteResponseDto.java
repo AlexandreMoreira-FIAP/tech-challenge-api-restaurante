@@ -19,6 +19,8 @@ public class RestauranteResponseDto {
 
     String tipoDeCozinha;
 
+    String horarioFuncionamento;
+
     String login;
 
     String senha;
@@ -30,5 +32,7 @@ public class RestauranteResponseDto {
     LocalDateTime dataUltimaAlteracao;
 
     List<UsuarioSimpleDto> usuarios;
+
+    UsuarioSimpleDto usuarioProprietario;
 
 }

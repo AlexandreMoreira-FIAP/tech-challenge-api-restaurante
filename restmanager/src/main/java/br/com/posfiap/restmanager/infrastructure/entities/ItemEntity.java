@@ -35,4 +35,8 @@ public class ItemEntity {
 
     private String foto; // Caminho ou URL da foto
 
+    @ManyToOne
+    @JoinColumn(name = "restaurante_id", nullable = false)
+    private RestauranteEntity restaurante;
+
 }
