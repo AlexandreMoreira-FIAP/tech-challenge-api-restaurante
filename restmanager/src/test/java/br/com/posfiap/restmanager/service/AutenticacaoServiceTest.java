@@ -65,10 +65,23 @@ class AutenticacaoServiceTest {
         when(usuarioService.buscarPorLogin("usuario@test.com")).thenReturn(Optional.of(usuario));
         when(passwordEncoder.matches("senhaIncorreta", "senhaEncriptada")).thenReturn(false);
 
-        assertThrows(AuthenticationException.class, 
+        AuthenticationException exception = assertThrows(AuthenticationException.class, 
             () -> autenticacaoService.autenticarLogin("usuario@test.com", "senhaIncorreta"));
 
+        assertEquals("Login ou senha incorreto.", exception.getMessage());
         verify(usuarioService).buscarPorLogin("usuario@test.com");
         verify(passwordEncoder).matches("senhaIncorreta", "senhaEncriptada");
+    }
+
+    @Test
+    void deveLancarExcecaoComMensagemCorretaQuandoUsuarioNaoEncontrado() {
+        when(usuarioService.buscarPorLogin("usuario@test.com")).thenReturn(Optional.empty());
+
+        AuthenticationException exception = assertThrows(AuthenticationException.class, 
+            () -> autenticacaoService.autenticarLogin("usuario@test.com", "senhaCorreta"));
+
+        assertEquals("Login ou senha incorreto.", exception.getMessage());
+        verify(usuarioService).buscarPorLogin("usuario@test.com");
+        verify(passwordEncoder, never()).matches(anyString(), anyString());
     }
 }
