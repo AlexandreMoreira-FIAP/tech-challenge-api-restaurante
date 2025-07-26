@@ -21,4 +21,8 @@ public class ItemResponseDto {
     Boolean somenteConsumoLocal;
 
     String foto; // Caminho ou URL da foto
+
+    Long restauranteId;
+
+    RestauranteSimpleDto restaurante;
 }

@@ -1,13 +1,15 @@
 package br.com.posfiap.restmanager.mapper;
 
-import br.com.posfiap.restmanager.domain.Endereco;
-import br.com.posfiap.restmanager.domain.Usuario;
+import br.com.posfiap.restmanager.domain.entities.Endereco;
+import br.com.posfiap.restmanager.domain.entities.Usuario;
 import br.com.posfiap.restmanager.dto.EnderecoDto;
 import br.com.posfiap.restmanager.dto.UsuarioCreateDto;
 import br.com.posfiap.restmanager.dto.UsuarioResponseDto;
 import br.com.posfiap.restmanager.dto.UsuarioUpdateDto;
-import br.com.posfiap.restmanager.entity.EnderecoEntity;
-import br.com.posfiap.restmanager.entity.UsuarioEntity;
+import br.com.posfiap.restmanager.dto.RestauranteSimpleDto;
+import br.com.posfiap.restmanager.infrastructure.entities.RestauranteEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.EnderecoEntity;
+import br.com.posfiap.restmanager.infrastructure.entities.UsuarioEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -36,4 +38,6 @@ public interface UsuarioMapper {
     Usuario mapToUsuario(UsuarioEntity usuarioEntity);
 
     EnderecoEntity mapToEnderecoEntity(Endereco endereco);
+
+    RestauranteSimpleDto mapToRestauranteSimpleDto(RestauranteEntity restauranteEntity);
 }
