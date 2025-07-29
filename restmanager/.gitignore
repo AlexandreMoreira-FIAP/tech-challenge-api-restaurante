@@ -1,5 +1,13 @@
-target
-.git
-.idea
+target/
+.git/
+.idea/
 *.iml
 Dockerfile
+
+# Eclipse files (should not exist in IntelliJ project)
+.classpath
+.project
+.settings/
+
+# Other IDE files
+.vscode/
