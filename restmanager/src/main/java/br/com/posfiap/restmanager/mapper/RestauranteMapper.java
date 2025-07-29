@@ -13,27 +13,33 @@ import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 
-@Mapper(componentModel = "spring", imports = LocalDateTime.class)
+@Mapper(componentModel = "spring", imports = LocalDateTime.class, uses = ItemMapper.class)
 public interface RestauranteMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dataUltimaAlteracao", ignore = true)
+    @Mapping(target = "usuarios", ignore = true)
+    @Mapping(target = "itens", ignore = true)
     Restaurante mapToRestaurante(RestauranteCreateDto restauranteCreateDto);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "senha", ignore = true)
     @Mapping(target = "dataUltimaAlteracao", ignore = true)
+    @Mapping(target = "usuarios", ignore = true)
+    @Mapping(target = "itens", ignore = true)
     Restaurante mapToRestaurante(RestauranteUpdateDto restauranteUpdateDto);
 
     RestauranteResponseDto mapToRestauranteResponseDto(Restaurante restaurante);
 
-    @Mapping(target = "id", ignore = true)
-    Endereco mapToEndereco(EnderecoDto enderecoDto);
-
     @Mapping(target = "dataUltimaAlteracao", expression = "java(LocalDateTime.now())")
+    @Mapping(target = "itens", ignore = true)
     RestauranteEntity mapToRestauranteEntity(Restaurante restaurante);
 
+    @Mapping(target = "usuarios", ignore = true)
     Restaurante mapToRestaurante(RestauranteEntity restauranteEntity);
+
+    @Mapping(target = "id", ignore = true)
+    Endereco mapToEndereco(EnderecoDto enderecoDto);
 
     EnderecoEntity mapToEnderecoEntity(Endereco endereco);
 }

@@ -22,4 +22,6 @@ public class Item {
 
     String foto; // Caminho ou URL da foto
 
+    Restaurante restaurante;
+
 }

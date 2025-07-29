@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 import static java.text.MessageFormat.format;
@@ -28,6 +29,7 @@ public class RestauranteService {
 
     private final RestauranteRepository restauranteRepository;
     private final PasswordEncoder passwordEncoder;
+    private final UsuarioService usuarioService;
 
     public Restaurante incluir(Restaurante restaurante) {
 
@@ -36,6 +38,23 @@ public class RestauranteService {
         restaurante.setSenha(passwordEncoder.encode(restaurante.getSenha()));
 
         return restauranteRepository.salvar(restaurante);
+    }
+
+    public Restaurante incluir(Restaurante restaurante, List<Long> usuarioIds) {
+
+        validarDisponibilidadeLogin(restaurante.getLogin());
+
+        restaurante.setSenha(passwordEncoder.encode(restaurante.getSenha()));
+
+        var restauranteSalvo = restauranteRepository.salvar(restaurante);
+
+        if (usuarioIds != null && !usuarioIds.isEmpty()) {
+            var usuarios = usuarioService.buscarPorIds(usuarioIds);
+            restauranteSalvo.setUsuarios(usuarios);
+            restauranteSalvo = restauranteRepository.salvar(restauranteSalvo);
+        }
+
+        return restauranteSalvo;
     }
 
     public Restaurante buscarPorId(Long id) {

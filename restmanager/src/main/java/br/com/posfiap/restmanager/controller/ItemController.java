@@ -31,7 +31,7 @@ class ItemController implements ItemApi {
 
         logRequestController(INCLUIR_ITEM, itemCreateDto);
 
-        var item = itemService.incluir(itemMapper.mapToItem(itemCreateDto));
+        var item = itemService.incluir(itemMapper.mapToItem(itemCreateDto), itemCreateDto.getRestauranteId());
         var itemResponseDto = itemMapper.mapToItemResponseDto(item);
 
         logResponseController(INCLUIR_ITEM, itemResponseDto);

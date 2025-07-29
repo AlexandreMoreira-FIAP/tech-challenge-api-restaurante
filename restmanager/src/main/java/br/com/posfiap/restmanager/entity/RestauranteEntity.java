@@ -49,4 +49,7 @@ public class RestauranteEntity {
     )
     private List<UsuarioEntity> usuarios;
 
+    @OneToMany(mappedBy = "restaurante", cascade = CascadeType.ALL)
+    private List<ItemEntity> itens;
+
 }

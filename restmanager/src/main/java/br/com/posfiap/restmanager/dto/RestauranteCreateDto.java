@@ -34,4 +34,6 @@ public class RestauranteCreateDto {
     @Valid
     @NotNull
     EnderecoDto endereco;
+
+    List<Long> usuarioIds;
 }

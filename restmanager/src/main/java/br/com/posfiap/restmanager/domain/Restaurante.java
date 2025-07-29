@@ -1,7 +1,6 @@
 package br.com.posfiap.restmanager.domain;
 
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
-import br.com.posfiap.restmanager.entity.UsuarioEntity;
 import lombok.Builder;
 import lombok.Data;
 
@@ -28,5 +27,7 @@ public class Restaurante {
 
     LocalDateTime dataUltimaAlteracao;
 
-    private List<UsuarioEntity> usuarios;
+    private List<Usuario> usuarios;
+    
+    private List<Item> itens;
 }

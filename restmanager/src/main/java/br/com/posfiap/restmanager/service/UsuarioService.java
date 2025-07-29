@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 import static java.text.MessageFormat.format;
@@ -99,5 +100,9 @@ public class UsuarioService {
 
             throw new AuthenticationException(SENHA_INCORRETA);
         }
+    }
+
+    public List<Usuario> buscarPorIds(List<Long> ids) {
+        return usuarioRepository.buscarPorIds(ids);
     }
 }
