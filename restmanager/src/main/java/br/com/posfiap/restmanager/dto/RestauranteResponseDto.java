@@ -30,6 +30,8 @@ public class RestauranteResponseDto {
     Endereco endereco;
 
     LocalDateTime dataUltimaAlteracao;
+    
+    List<ItemResponseDto> itens;
 
     List<UsuarioSimpleDto> usuarios;
 

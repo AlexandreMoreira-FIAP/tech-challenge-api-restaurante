@@ -6,30 +6,36 @@ import br.com.posfiap.restmanager.error.BusinessException;
 import br.com.posfiap.restmanager.error.NotFoundException;
 import br.com.posfiap.restmanager.infrastructure.adapters.persistence.ItemRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
-
 import static java.text.MessageFormat.format;
-import static java.time.LocalDateTime.now;
-import static java.util.Objects.nonNull;
-import static org.apache.commons.lang3.StringUtils.isNotBlank;
 
 @Component
 @RequiredArgsConstructor
 public class ItemService {
 
-    private static final String Item_NAO_ENCONTRADO = "Usuário não encontrado com ID {0}.";
-    private static final String LOGIN_INDISPONIVEL = "Login {0} não está disponível.";
-    private static final String SENHA_INCORRETA = "Senha incorreta.";
+    private static final String Item_NAO_ENCONTRADO = "Item não encontrado com ID {0}.";
 
     private final ItemRepository itemRepository;
-    private final PasswordEncoder passwordEncoder;
+    private final RestauranteService restauranteService;
 
     public Item incluir(Item item) {
 
         return itemRepository.salvar(item);
+    }
+
+    public Item incluir(Item item, Long restauranteId) {
+
+        // Verificar se o restaurante existe
+        var restaurante = restauranteService.buscarPorId(restauranteId);
+        
+        // Salvar o item primeiro
+        var itemSalvo = itemRepository.salvar(item);
+        
+        // Associar ao restaurante (será feito pelo relacionamento JPA)
+        itemSalvo.setRestaurante(restaurante);
+        
+        return itemRepository.salvar(itemSalvo);
     }
 
     public Item buscarPorId(Long id) {

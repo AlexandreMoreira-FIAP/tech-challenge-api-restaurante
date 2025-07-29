@@ -5,6 +5,7 @@ import br.com.posfiap.restmanager.application.usecases.UsuarioUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -35,5 +36,9 @@ public class UsuarioService {
 
     public Usuario atualizar(Long id, Usuario usuario) {
         return usuarioUseCase.atualizar(id, usuario);
+    }
+
+    public List<Usuario> buscarPorIds(List<Long> ids) {
+        return usuarioRepository.buscarPorIds(ids);
     }
 }

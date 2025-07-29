@@ -33,7 +33,9 @@ class RestauranteController implements RestauranteApi {
 
         logRequestController(INCLUIR_RESTAURANTE, restauranteCreateDto);
 
-        var restaurante = restauranteService.incluir(restauranteMapper.mapToRestaurante(restauranteCreateDto));
+        var restaurante = restauranteService.incluir(
+                restauranteMapper.mapToRestaurante(restauranteCreateDto), 
+                restauranteCreateDto.getUsuarioIds());
         var restauranteResponseDto = restauranteMapper.mapToRestauranteResponseDto(restaurante);
 
         logResponseController(INCLUIR_RESTAURANTE, restauranteResponseDto);

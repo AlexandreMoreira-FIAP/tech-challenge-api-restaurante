@@ -36,7 +36,11 @@ public class ItemEntity {
     private String foto; // Caminho ou URL da foto
 
     @ManyToOne
+<<<<<<< HEAD:restmanager/src/main/java/br/com/posfiap/restmanager/infrastructure/entities/ItemEntity.java
     @JoinColumn(name = "restaurante_id", nullable = false)
+=======
+    @JoinColumn(name = "restaurante_id")
+>>>>>>> 8bf6e47a7f610d7bf2ccf011f2f45fae6aadb6ed:restmanager/src/main/java/br/com/posfiap/restmanager/entity/ItemEntity.java
     private RestauranteEntity restaurante;
 
 }

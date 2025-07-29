@@ -39,6 +39,6 @@ public class UsuarioEntity {
     @JoinColumn(name = "id_endereco", referencedColumnName = "id")
     private EnderecoEntity endereco;
 
-    @ManyToMany(mappedBy = "usuarios") // referência ao nome da lista em RestauranteEntity
+    @ManyToMany(mappedBy = "usuarios", fetch = FetchType.EAGER) // referência ao nome da lista em RestauranteEntity
     private List<RestauranteEntity> restaurantes;
 }

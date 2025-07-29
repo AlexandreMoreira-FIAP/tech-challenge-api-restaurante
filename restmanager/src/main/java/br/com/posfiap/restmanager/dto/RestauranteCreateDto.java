@@ -38,6 +38,10 @@ public class RestauranteCreateDto {
     @NotNull
     EnderecoDto endereco;
 
+<<<<<<< HEAD
     @NotNull
     Long usuarioProprietarioId;
+=======
+    List<Long> usuarioIds;
+>>>>>>> 8bf6e47a7f610d7bf2ccf011f2f45fae6aadb6ed
 }
