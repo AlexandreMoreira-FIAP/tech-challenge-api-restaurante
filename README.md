@@ -1,4 +1,7 @@
 
+#Não Alterar essa branch
+
+
 # 🧩 Descrição do Problema
 
 Um grupo de restaurantes da região enfrentava altos custos com sistemas de gestão individuais. Para reduzir despesas, decidiram criar um sistema único e compartilhado, desenvolvido por estudantes.
