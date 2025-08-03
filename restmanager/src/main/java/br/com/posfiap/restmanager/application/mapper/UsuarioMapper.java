@@ -12,8 +12,7 @@ import java.time.LocalDateTime;
 
 @Mapper(
         componentModel = "spring",
-        uses = {EnderecoMapper.class, RestauranteMapper.class},
-        imports = LocalDateTime.class
+        uses = {EnderecoMapper.class}, imports = LocalDateTime.class
 )
 public interface UsuarioMapper {
 

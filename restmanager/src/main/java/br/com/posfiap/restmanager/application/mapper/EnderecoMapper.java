@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface EnderecoMapper {
 
+
     Endereco mapToEndereco(EnderecoDto enderecoDto);
 
     EnderecoDto mapToEnderecoDto(Endereco endereco);
