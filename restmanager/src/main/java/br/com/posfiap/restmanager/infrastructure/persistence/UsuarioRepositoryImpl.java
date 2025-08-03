@@ -40,10 +40,4 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
         return usuarioJpaRepository.findByLogin(login)
                 .map(usuarioMapper::mapToUsuario);
     }
-
-    @Override
-    public Optional<Usuario> buscarComRestaurantes(Long id) {
-        return usuarioJpaRepository.findWithRestaurantesById(id)
-                .map(usuarioMapper::mapToUsuario);
-    }
 }

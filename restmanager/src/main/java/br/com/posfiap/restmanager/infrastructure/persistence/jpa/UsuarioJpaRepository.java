@@ -9,7 +9,4 @@ import java.util.Optional;
 public interface UsuarioJpaRepository extends JpaRepository<UsuarioEntity, Long> {
 
     Optional<UsuarioEntity> findByLogin(String login);
-
-    @EntityGraph(attributePaths = "restaurantes")
-    Optional<UsuarioEntity> findWithRestaurantesById(Long id);
 }

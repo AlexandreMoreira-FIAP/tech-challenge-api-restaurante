@@ -1,6 +1,5 @@
 package br.com.posfiap.restmanager.application.mapper;
 
-import br.com.posfiap.restmanager.application.dto.UsuarioComRestaurantesDto;
 import br.com.posfiap.restmanager.domain.model.Usuario;
 import br.com.posfiap.restmanager.infrastructure.persistence.entity.UsuarioEntity;
 import br.com.posfiap.restmanager.application.dto.UsuarioCreateDto;
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Mapper(
         componentModel = "spring",
-        uses = {EnderecoMapper.class, RestauranteResumoMapper.class},
+        uses = {EnderecoMapper.class, RestauranteMapper.class},
         imports = LocalDateTime.class
 )
 public interface UsuarioMapper {
@@ -29,11 +28,6 @@ public interface UsuarioMapper {
 
     @Mapping(target = "endereco", source = "endereco")
     UsuarioResponseDto mapToUsuarioResponseDto(Usuario usuario);
-
-    @Mapping(target = "endereco", source = "endereco")
-    @Mapping(target = "restaurantes", source = "restaurantes")
-    UsuarioComRestaurantesDto mapToUsuarioComRestaurantesDto(Usuario usuario);
-
 
     @Mapping(target = "dataUltimaAlteracao", expression = "java(LocalDateTime.now())")
     UsuarioEntity mapToUsuarioEntity(Usuario usuario);

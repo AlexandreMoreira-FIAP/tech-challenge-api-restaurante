@@ -35,9 +35,4 @@ interface UsuarioApi {
     @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Alterar senha do usuário")
     void alterarSenha(@PathVariable Long id, @RequestBody @Valid SenhaDto senhaDto);
-
-    @Operation(summary = "Buscar usuário com restaurantes")
-    @GetMapping("/{id}/com-restaurantes")
-    UsuarioComRestaurantesDto buscarComRestaurantes(@PathVariable Long id);
-
 }

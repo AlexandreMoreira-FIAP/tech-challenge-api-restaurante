@@ -26,7 +26,6 @@ class UsuarioController implements UsuarioApi {
     private final AtualizarUsuarioUseCase atualizarUsuarioUseCase;
     private final DeletarUsuarioUseCase deletarUsuarioUseCase;
     private final AlterarSenhaUsuarioUseCase alterarSenhaUsuarioUseCase;
-    private final BuscarUsuarioComRestaurantesUseCase buscarUsuarioComRestaurantesUseCase;
     private final UsuarioMapper usuarioMapper;
 
     @Override
@@ -77,14 +76,4 @@ class UsuarioController implements UsuarioApi {
         logResponseController(format(ALTERAR_SENHA_USUARIO, id));
     }
 
-    @Override
-    public UsuarioComRestaurantesDto buscarComRestaurantes(Long id) {
-        logRequestController(format(CONSULTAR_USUARIO_COM_RESTAURANTES, id));
-
-        var usuario = buscarUsuarioComRestaurantesUseCase.executar(id);
-        var usuarioComRestaurantesDto = usuarioMapper.mapToUsuarioComRestaurantesDto(usuario);
-
-        logResponseController(format(CONSULTAR_USUARIO_COM_RESTAURANTES, id), usuarioComRestaurantesDto);
-        return usuarioComRestaurantesDto;
-    }
 }

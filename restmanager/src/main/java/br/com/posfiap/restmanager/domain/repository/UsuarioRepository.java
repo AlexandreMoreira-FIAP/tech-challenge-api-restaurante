@@ -12,6 +12,4 @@ public interface UsuarioRepository {
     void excluir(Long id);
 
     Optional<Usuario> buscarPorLogin(String login);
-
-    Optional<Usuario> buscarComRestaurantes(Long id);
 }
