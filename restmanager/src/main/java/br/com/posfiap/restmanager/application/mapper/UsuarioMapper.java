@@ -13,7 +13,7 @@ import org.mapstruct.Mapping;
 
 import java.time.LocalDateTime;
 
-@Mapper(componentModel = "spring", imports = LocalDateTime.class)
+@Mapper(componentModel = "spring", uses = EnderecoMapper.class, imports = LocalDateTime.class)
 public interface UsuarioMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -25,15 +25,10 @@ public interface UsuarioMapper {
     @Mapping(target = "dataUltimaAlteracao", ignore = true)
     Usuario mapToUsuario(UsuarioUpdateDto usuarioUpdateDto);
 
-    @Mapping(target = "id", ignore = true)
-    Endereco mapToEndereco(EnderecoDto enderecoDto);
-
     UsuarioResponseDto mapToUsuarioResponseDto(Usuario usuario);
 
     @Mapping(target = "dataUltimaAlteracao", expression = "java(LocalDateTime.now())")
     UsuarioEntity mapToUsuarioEntity(Usuario usuario);
-
-    EnderecoEntity mapToEnderecoEntity(Endereco endereco);
 
     Usuario mapToUsuario(UsuarioEntity usuarioEntity);
 }
