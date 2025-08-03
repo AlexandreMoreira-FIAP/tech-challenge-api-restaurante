@@ -3,12 +3,11 @@ package br.com.posfiap.restmanager.infrastructure.persistence;
 import br.com.posfiap.restmanager.application.mapper.UsuarioMapper;
 import br.com.posfiap.restmanager.domain.model.Usuario;
 import br.com.posfiap.restmanager.domain.repository.UsuarioRepository;
-import br.com.posfiap.restmanager.infrastructure.persistence.jpa.UsuarioJpaRepository;
 import br.com.posfiap.restmanager.infrastructure.persistence.entity.UsuarioEntity;
+import br.com.posfiap.restmanager.infrastructure.persistence.jpa.UsuarioJpaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -43,9 +42,8 @@ public class UsuarioRepositoryImpl implements UsuarioRepository {
     }
 
     @Override
-    public List<Usuario> buscarPorIds(List<Long> ids) {
-        return usuarioJpaRepository.findAllById(ids).stream()
-                .map(usuarioMapper::mapToUsuario)
-                .toList();
+    public Optional<Usuario> buscarComRestaurantes(Long id) {
+        return usuarioJpaRepository.findWithRestaurantesById(id)
+                .map(usuarioMapper::mapToUsuario);
     }
 }

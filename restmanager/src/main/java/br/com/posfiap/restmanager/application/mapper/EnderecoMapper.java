@@ -13,7 +13,6 @@ public interface EnderecoMapper {
 
     EnderecoDto mapToEnderecoDto(Endereco endereco);
 
-    @Mapping(target = "id", ignore = true)
     EnderecoEntity mapToEnderecoEntity(Endereco endereco);
 
     Endereco mapToEndereco(EnderecoEntity enderecoEntity);

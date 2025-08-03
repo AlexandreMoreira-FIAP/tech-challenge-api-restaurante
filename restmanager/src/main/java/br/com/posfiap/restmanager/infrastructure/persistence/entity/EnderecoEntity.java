@@ -15,7 +15,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-@Table(name = "endereco")
+@Table(name = "enderecos")
 public class EnderecoEntity {
 
     @Id

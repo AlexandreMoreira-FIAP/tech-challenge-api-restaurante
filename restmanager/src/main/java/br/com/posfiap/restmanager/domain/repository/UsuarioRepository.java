@@ -1,8 +1,6 @@
 package br.com.posfiap.restmanager.domain.repository;
 
 import br.com.posfiap.restmanager.domain.model.Usuario;
-
-import java.util.List;
 import java.util.Optional;
 
 public interface UsuarioRepository {
@@ -15,5 +13,5 @@ public interface UsuarioRepository {
 
     Optional<Usuario> buscarPorLogin(String login);
 
-    List<Usuario> buscarPorIds(List<Long> ids);
+    Optional<Usuario> buscarComRestaurantes(Long id);
 }

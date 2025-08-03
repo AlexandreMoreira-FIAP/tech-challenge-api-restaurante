@@ -3,6 +3,7 @@ package br.com.posfiap.restmanager.infrastructure.exception;
 import br.com.posfiap.restmanager.domain.exception.AuthenticationException;
 import br.com.posfiap.restmanager.domain.exception.BusinessException;
 import br.com.posfiap.restmanager.domain.exception.NotFoundException;
+import br.com.posfiap.restmanager.domain.exception.UnauthorizedException;
 import br.com.posfiap.restmanager.application.dto.ErroResponseDto;
 import br.com.posfiap.restmanager.infrastructure.util.Logger;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,12 @@ public class DefaultExceptionHandler {
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<ErroResponseDto> handleAuthenticationException(AuthenticationException ex) {
+        Logger.logError(ex.getMessage(), ex);
+        return ResponseEntity.status(UNAUTHORIZED).body(ex.getErroResponseDto());
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public ResponseEntity<ErroResponseDto> handleUnauthorizedException(UnauthorizedException ex) {
         Logger.logError(ex.getMessage(), ex);
         return ResponseEntity.status(UNAUTHORIZED).body(ex.getErroResponseDto());
     }

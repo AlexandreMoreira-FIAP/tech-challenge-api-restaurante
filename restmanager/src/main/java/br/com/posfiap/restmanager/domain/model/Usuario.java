@@ -3,7 +3,7 @@ package br.com.posfiap.restmanager.domain.model;
 import br.com.posfiap.restmanager.domain.enums.TipoUsuario;
 import lombok.Builder;
 import lombok.Data;
-
+import java.util.List;
 import java.time.LocalDateTime;
 
 @Data
@@ -23,6 +23,8 @@ public class Usuario {
     TipoUsuario tipoUsuario;
 
     Endereco endereco;
+
+    List<Restaurante> restaurantes;
 
     LocalDateTime dataUltimaAlteracao;
 

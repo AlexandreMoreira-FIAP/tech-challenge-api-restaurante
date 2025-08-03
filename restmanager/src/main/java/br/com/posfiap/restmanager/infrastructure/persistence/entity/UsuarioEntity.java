@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -36,4 +37,7 @@ public class UsuarioEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private EnderecoEntity endereco;
+
+    @OneToMany(mappedBy = "proprietario", fetch = FetchType.LAZY)
+    private List<RestauranteEntity> restaurantes;
 }

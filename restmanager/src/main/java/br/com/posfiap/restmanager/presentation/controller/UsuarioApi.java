@@ -1,9 +1,6 @@
 package br.com.posfiap.restmanager.presentation.controller;
 
-import br.com.posfiap.restmanager.application.dto.SenhaDto;
-import br.com.posfiap.restmanager.application.dto.UsuarioCreateDto;
-import br.com.posfiap.restmanager.application.dto.UsuarioResponseDto;
-import br.com.posfiap.restmanager.application.dto.UsuarioUpdateDto;
+import br.com.posfiap.restmanager.application.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.validation.annotation.Validated;
@@ -38,4 +35,9 @@ interface UsuarioApi {
     @ResponseStatus(NO_CONTENT)
     @Operation(summary = "Alterar senha do usuário")
     void alterarSenha(@PathVariable Long id, @RequestBody @Valid SenhaDto senhaDto);
+
+    @Operation(summary = "Buscar usuário com restaurantes")
+    @GetMapping("/{id}/com-restaurantes")
+    UsuarioComRestaurantesDto buscarComRestaurantes(@PathVariable Long id);
+
 }
