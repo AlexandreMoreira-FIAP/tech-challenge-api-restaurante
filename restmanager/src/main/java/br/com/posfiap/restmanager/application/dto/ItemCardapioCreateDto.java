@@ -23,6 +23,4 @@ public class ItemCardapioCreateDto {
 
     private String caminhoFoto;
 
-    @NotNull
-    private Long idRestaurante;
 }
