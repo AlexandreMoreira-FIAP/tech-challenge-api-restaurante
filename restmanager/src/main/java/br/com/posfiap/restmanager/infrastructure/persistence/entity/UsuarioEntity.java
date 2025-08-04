@@ -37,7 +37,4 @@ public class UsuarioEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private EnderecoEntity endereco;
-
-    @OneToMany(mappedBy = "proprietario", fetch = FetchType.LAZY)
-    private List<RestauranteEntity> restaurantes;
 }
