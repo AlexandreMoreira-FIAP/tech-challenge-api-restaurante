@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "itens_cardapio")
@@ -31,4 +32,6 @@ public class ItemCardapioEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "restaurante_id", referencedColumnName = "id")
     private RestauranteEntity restaurante;
+
+    private LocalDateTime dataUltimaAlteracao;
 }
