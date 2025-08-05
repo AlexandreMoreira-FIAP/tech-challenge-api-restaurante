@@ -1,0 +1,876 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+		"name": "RestManager API - Tech Challenge FIAP",
+		"description": "Collection completa da API RestManager para gestão de restaurantes.\n\n## 📖 Descrição\nSistema de gestão para restaurantes desenvolvido com Spring Boot seguindo Clean Architecture.\n\n## 🔧 Configuração\n- **Base URL Local**: http://localhost:8081\n- **Swagger UI**: http://localhost:8081/swagger-ui.html\n- **Banco PostgreSQL**: localhost:5432/restdb\n\n## 📋 Funcionalidades\n- ✅ CRUD Usuários (Proprietários e Clientes)\n- ✅ CRUD Restaurantes \n- ✅ CRUD Itens do Cardápio\n\n## 🚀 Como usar\n1. Execute `docker-compose up --build` na pasta restmanager\n2. Aguarde inicialização completa\n3. Execute as requisições na ordem sugerida\n\n## 📞 Suporte\nConsulte o README.md do projeto para mais detalhes.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12345678"
+	},
+	"item": [
+		{
+			"name": "👥 USUÁRIOS",
+			"item": [
+				{
+					"name": "Criar Usuário Proprietário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.collectionVariables.set(\"userId\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Response has correct tipoUsuario\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.tipoUsuario).to.eql(\"PROPRIETARIO\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"João da Silva\",\n  \"email\": \"joao.silva@email.com\",\n  \"login\": \"joao.silva\",\n  \"senha\": \"minhasenha123\",\n  \"tipoUsuario\": \"PROPRIETARIO\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores, 123\",\n    \"numero\": \"123\",\n    \"complemento\": \"Apto 45\",\n    \"bairro\": \"Centro\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01234-567\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Usuário Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.collectionVariables.set(\"clienteId\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Response has correct tipoUsuario\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.tipoUsuario).to.eql(\"CLIENTE\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Maria Santos\",\n  \"email\": \"maria.santos@email.com\",\n  \"login\": \"maria.santos\",\n  \"senha\": \"senha456\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"Av. Paulista, 1000\",\n    \"numero\": \"1000\",\n    \"complemento\": \"14º andar\",\n    \"bairro\": \"Bela Vista\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01310-100\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuário por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has user data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('nome');",
+									"    pm.expect(jsonData).to.have.property('email');",
+									"    pm.expect(jsonData).to.have.property('endereco');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has updated data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"João da Silva Atualizado\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"João da Silva Atualizado\",\n  \"email\": \"joao.silva.novo@email.com\",\n  \"login\": \"joao.silva.novo\",\n  \"tipoUsuario\": \"PROPRIETARIO\",\n  \"endereco\": {\n    \"rua\": \"Rua das Flores, 456\",\n    \"numero\": \"456\",\n    \"complemento\": \"Casa\",\n    \"bairro\": \"Jardins\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01406-000\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Senha do Usuário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senhaAtual\": \"minhasenha123\",\n  \"novaSenha\": \"novasenha456\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios/{{userId}}/senha",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios",
+								"{{userId}}",
+								"senha"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🏪 RESTAURANTES",
+			"item": [
+				{
+					"name": "Criar Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.collectionVariables.set(\"restauranteId\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Response has proprietário data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nomeProprietario');",
+									"    pm.expect(jsonData).to.have.property('emailProprietario');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Trattoria Nonna\",\n  \"tipoCozinha\": \"Italiana\",\n  \"horarioFuncionamento\": \"11h às 23h\",\n  \"endereco\": {\n    \"rua\": \"Rua Augusta, 456\",\n    \"numero\": \"456\",\n    \"complemento\": \"Térreo\",\n    \"bairro\": \"Consolação\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01305-000\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurantes/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Restaurante por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has restaurant data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('nome');",
+									"    pm.expect(jsonData).to.have.property('tipoCozinha');",
+									"    pm.expect(jsonData).to.have.property('endereco');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurantes/{{restauranteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"{{restauranteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has updated data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Trattoria Nonna Atualizada\");",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Trattoria Nonna Atualizada\",\n  \"tipoCozinha\": \"Mediterrânea\",\n  \"horarioFuncionamento\": \"12h às 00h\",\n  \"endereco\": {\n    \"rua\": \"Rua Augusta, 789\",\n    \"numero\": \"789\",\n    \"complemento\": \"1º andar\",\n    \"bairro\": \"Consolação\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"01305-100\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurantes/{{restauranteId}}/proprietario/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"{{restauranteId}}",
+								"proprietario",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Restaurantes por Proprietário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"});",
+									"",
+									"pm.test(\"Array contains restaurant data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.length > 0) {",
+									"        pm.expect(jsonData[0]).to.have.property('id');",
+									"        pm.expect(jsonData[0]).to.have.property('nome');",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurantes/proprietario/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"proprietario",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "📋 ITENS DO CARDÁPIO",
+			"item": [
+				{
+					"name": "Criar Item do Cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.collectionVariables.set(\"itemId\", jsonData.id);",
+									"});",
+									"",
+									"pm.test(\"Response has item data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('nome');",
+									"    pm.expect(jsonData).to.have.property('preco');",
+									"    pm.expect(jsonData.disponivel).to.be.true;",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Pizza Margherita\",\n  \"descricao\": \"Pizza tradicional com molho de tomate, mussarela e manjericão fresco\",\n  \"preco\": 32.90,\n  \"disponivel\": true,\n  \"caminhoFoto\": \"/images/pizza-margherita.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/itens-cardapio/{{restauranteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"itens-cardapio",
+								"{{restauranteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Segundo Item do Cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {",
+									"    pm.response.to.have.status(201);",
+									"});",
+									"",
+									"pm.test(\"Response has id\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.collectionVariables.set(\"item2Id\", jsonData.id);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Lasanha Bolonhesa\",\n  \"descricao\": \"Lasanha caseira com molho bolonhesa, queijo e bechamel\",\n  \"preco\": 28.50,\n  \"disponivel\": false,\n  \"caminhoFoto\": \"/images/lasanha-bolonhesa.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/itens-cardapio/{{restauranteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"itens-cardapio",
+								"{{restauranteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Item por ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has item data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.have.property('id');",
+									"    pm.expect(jsonData).to.have.property('nome');",
+									"    pm.expect(jsonData).to.have.property('descricao');",
+									"    pm.expect(jsonData).to.have.property('preco');",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/itens-cardapio/{{itemId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"itens-cardapio",
+								"{{itemId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Item do Cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response has updated data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData.nome).to.eql(\"Pizza Margherita Premium\");",
+									"    pm.expect(jsonData.preco).to.eql(39.90);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Pizza Margherita Premium\",\n  \"descricao\": \"Pizza artesanal com molho de tomate orgânico, mussarela de búfala e manjericão fresco\",\n  \"preco\": 39.90,\n  \"disponivel\": true,\n  \"caminhoFoto\": \"/images/pizza-margherita-premium.jpg\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/itens-cardapio/{{itemId}}/restaurante/{{restauranteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"itens-cardapio",
+								"{{itemId}}",
+								"restaurante",
+								"{{restauranteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Itens por Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});",
+									"",
+									"pm.test(\"Response is array\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    pm.expect(jsonData).to.be.an('array');",
+									"});",
+									"",
+									"pm.test(\"Array contains item data\", function () {",
+									"    var jsonData = pm.response.json();",
+									"    if (jsonData.length > 0) {",
+									"        pm.expect(jsonData[0]).to.have.property('id');",
+									"        pm.expect(jsonData[0]).to.have.property('nome');",
+									"        pm.expect(jsonData[0]).to.have.property('preco');",
+									"    }",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/itens-cardapio/restaurante/{{restauranteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"itens-cardapio",
+								"restaurante",
+								"{{restauranteId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "🗑️ LIMPEZA (DELETE)",
+			"item": [
+				{
+					"name": "Excluir Item do Cardápio",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/itens-cardapio/{{item2Id}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"itens-cardapio",
+								"{{item2Id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Restaurante",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/api/v1/restaurantes/{{restauranteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"v1",
+								"restaurantes",
+								"{{restauranteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Usuário Cliente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios/{{clienteId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios",
+								"{{clienteId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Usuário Proprietário",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 204\", function () {",
+									"    pm.response.to.have.status(204);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/usuarios/{{userId}}",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"usuarios",
+								"{{userId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8081",
+			"type": "string"
+		},
+		{
+			"key": "userId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "clienteId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "restauranteId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "itemId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "item2Id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
