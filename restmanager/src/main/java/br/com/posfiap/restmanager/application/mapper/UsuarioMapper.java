@@ -18,11 +18,13 @@ public interface UsuarioMapper {
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "dataUltimaAlteracao", ignore = true)
+    @Mapping(target = "restaurantes", ignore = true)
     Usuario mapToUsuario(UsuarioCreateDto usuarioCreateDto);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "senha", ignore = true)
     @Mapping(target = "dataUltimaAlteracao", ignore = true)
+    @Mapping(target = "restaurantes", ignore = true)
     Usuario mapToUsuario(UsuarioUpdateDto usuarioUpdateDto);
 
     @Mapping(target = "endereco", source = "endereco")
@@ -31,5 +33,6 @@ public interface UsuarioMapper {
     @Mapping(target = "dataUltimaAlteracao", expression = "java(LocalDateTime.now())")
     UsuarioEntity mapToUsuarioEntity(Usuario usuario);
 
+    @Mapping(target = "restaurantes", ignore = true)
     Usuario mapToUsuario(UsuarioEntity usuarioEntity);
 }

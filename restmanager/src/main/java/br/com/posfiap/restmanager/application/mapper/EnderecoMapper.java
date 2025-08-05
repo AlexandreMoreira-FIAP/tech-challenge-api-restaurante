@@ -4,10 +4,12 @@ import br.com.posfiap.restmanager.domain.model.Endereco;
 import br.com.posfiap.restmanager.infrastructure.persistence.entity.EnderecoEntity;
 import br.com.posfiap.restmanager.application.dto.EnderecoDto;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 
 @Mapper(componentModel = "spring")
 public interface EnderecoMapper {
 
+    @Mapping(target = "id", ignore = true)
     Endereco mapToEndereco(EnderecoDto enderecoDto);
 
     EnderecoDto mapToEnderecoDto(Endereco endereco);
