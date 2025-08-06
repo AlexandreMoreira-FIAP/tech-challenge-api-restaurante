@@ -4,17 +4,21 @@ server:
 spring:
   application:
     name: rest manager
+
   datasource:
     url: ${SPRING_DATASOURCE_URL}
     username: ${SPRING_DATASOURCE_USERNAME}
     password: ${SPRING_DATASOURCE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
   jpa:
-    hibernate.ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
+    hibernate:
+      ddl-auto: ${SPRING_JPA_HIBERNATE_DDL_AUTO:update}
     show-sql: ${SPRING_JPA_SHOW_SQL:true}
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
 logging:
   level:
-    br:
-      com:
-        posfiap:
-          restmanager: DEBUG
+    br.com.posfiap.restmanager: DEBUG
