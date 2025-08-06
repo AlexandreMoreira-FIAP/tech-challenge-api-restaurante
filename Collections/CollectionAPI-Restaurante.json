@@ -1,0 +1,440 @@
+{
+	"info": {
+		"_postman_id": "56a96ab5-c753-4a36-96cb-5af880dc7c8d",
+		"name": "API-Restaurante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "39967163"
+	},
+	"item": [
+		{
+			"name": "Teste-SemDados",
+			"item": [
+				{
+					"name": "Buscar Usuário por ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Necessário colocar o ID do usuário que deseja buscar as informações."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inserir Usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"string\",\n  \"email\": \"string\",\n  \"login\": \"string\",\n  \"senha\": \"string\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"string\",\n    \"numero\": \"string\",\n    \"complemento\": \"string\",\n    \"bairro\": \"string\",\n    \"cidade\": \"string\",\n    \"cep\": \"string\",\n    \"estado\": \"string\",\n    \"pais\": \"string\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/v1/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Usuário por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Necessário colocar o ID do usuário que deseja excluir as informações."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuário por ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"string\",\n  \"email\": \"string\",\n  \"login\": \"string\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"string\",\n    \"numero\": \"string\",\n    \"complemento\": \"string\",\n    \"bairro\": \"string\",\n    \"cidade\": \"string\",\n    \"cep\": \"string\",\n    \"estado\": \"string\",\n    \"pais\": \"string\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Necessário colocar o ID do usuário que deseja atualizar as informações e alterar no body o que deseja alterar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar a senha do Usuário por ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senhaAtual\": \"string\",\n  \"novaSenha\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id/senha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id",
+								"senha"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "",
+									"description": "Necessário colocar o ID do usuário que deseja atualizar a senha e colocar a senha antiga e nova no body"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autenticar Usuário por Login e Senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"string\",\n  \"senha\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/v1/autenticacao/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Teste-ComDados",
+			"item": [
+				{
+					"name": "Buscar Usuário por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Inserir Usuário",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Ana Beatriz Silva\",\n  \"email\": \"ana.silva@gmail.com\",\n  \"login\": \"anasilva\",\n  \"senha\": \"SenhaForte123!\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"Rua das Acácias\",\n    \"numero\": \"123\",\n    \"complemento\": \"Apto 202\",\n    \"bairro\": \"Jardim das Flores\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"04567890\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/v1/usuarios"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Usuário por ID",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Necessário colocar o ID do usuário que deseja excluir as informações."
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuário por ID",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nome\": \"Ana Beatriz Silva\",\n  \"email\": \"ana.silva@gmail.com\",\n  \"login\": \"anaana\",\n  \"tipoUsuario\": \"CLIENTE\",\n  \"endereco\": {\n    \"rua\": \"Rua das Acácias\",\n    \"numero\": \"12345\",\n    \"complemento\": \"Apto 202\",\n    \"bairro\": \"Jardim das Flores\",\n    \"cidade\": \"São Paulo\",\n    \"cep\": \"04567890\",\n    \"estado\": \"SP\",\n    \"pais\": \"Brasil\"\n  }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Necessário colocar o ID do usuário que deseja atualizar as informações e alterar no body o que deseja alterar"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar a senha do Usuário por ID",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"senhaAtual\": \"SenhaForte123!\",\n  \"novaSenha\": \"SenhaForte321!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/v1/usuarios/:id/senha",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"v1",
+								"usuarios",
+								":id",
+								"senha"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "Necessário colocar o ID do usuário que deseja atualizar a senha e colocar a senha antiga e nova no body"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Autenticar Usuário por Login e Senha",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "accept",
+								"value": "*/*"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"login\": \"anasilva\",\n  \"senha\": \"SenhaForte123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8081/v1/autenticacao/login"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
