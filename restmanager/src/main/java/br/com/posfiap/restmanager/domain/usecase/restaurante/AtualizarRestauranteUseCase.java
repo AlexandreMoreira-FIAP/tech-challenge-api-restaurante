@@ -24,7 +24,7 @@ public class AtualizarRestauranteUseCase {
                 .orElseThrow(() -> new NotFoundException(format(RESTAURANTE_NAO_ENCONTRADO, idRestaurante)));
 
         if (!restauranteExistente.getProprietario().getId().equals(idUsuario)) {
-            throw new UnauthorizedException(USUARIO_NAO_AUTORIZADO);
+            throw new UnauthorizedException(format(USUARIO_NAO_AUTORIZADO, idUsuario, idRestaurante));
         }
 
         restauranteAtualizado.setId(restauranteExistente.getId());
@@ -32,5 +32,4 @@ public class AtualizarRestauranteUseCase {
 
         return restauranteRepository.salvar(restauranteAtualizado);
     }
-
 }
